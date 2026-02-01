@@ -1,0 +1,119 @@
+/*
+ * This file is part of Betaflight.
+ *
+ * Betaflight is free software. You can redistribute this software
+ * and/or modify this software under the terms of the GNU General
+ * Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Betaflight is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this software.
+ *
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
+
+#define BEEPER PC14
+#define PIN_S1 PB1
+#define PIN_S2 PB4
+#define PIN_S3 PB3
+#define PIN_S4 PA15
+#define PIN_S5 PC8
+#define PIN_S6 PC9
+#define PIN_S7 PB6
+#define PIN_S8 PB7
+#define PIN_LED_STRIP PA8
+#define PIN_LED PC15
+
+
+#define UART1_ENABLE true
+#define PIN_UART1_TX PA9
+#define PIN_UART1_RX PA10
+
+#define UART2_ENABLE false
+#define PIN_UART2_TX PA2
+#define PIN_UART2_RX PA3
+
+#define UART3_ENABLE true
+#define PIN_UART3_TX PB10
+#define PIN_UART3_RX PB11
+
+#define UART4_ENABLE false
+#define PIN_UART4_TX PA0
+#define PIN_UART4_RX PA1
+
+#define UART5_ENABLE false
+#define PIN_UART5_TX PC12
+#define PIN_UART5_RX PD2
+
+#define UART6_ENABLE false
+#define PIN_UART6_TX PC6
+#define PIN_UART6_RX PC7
+
+
+#define I2C1_ENABLE true
+#define PIN_I2C1_SCL PB8
+#define PIN_I2C1_SDA PB9
+
+#define I2C2_ENABLE false
+#define PIN_I2C2_SCL PB10
+#define PIN_I2C2_SDA PB11
+
+#define I2C3_ENABLE false
+#define PIN_I2C3_SCL PA8
+#define PIN_I2C3_SDA PC9
+
+
+#define SPI1_ENABLE true
+#define PIN_SPI1_MISO PA6
+#define PIN_SPI1_MOSI PA3
+#define PIN_SPI1_SCK PA5
+
+#define SPI2_ENABLE false
+#define PIN_SPI2_MISO PB14
+#define PIN_SPI2_MOSI PB15
+#define PIN_SPI2_SCK PB13
+
+#define SPI3_ENABLE true
+#define PIN_SPI3_MISO PC11
+#define PIN_SPI3_MOSI PB5_ALT1
+#define PIN_SPI3_SCK PC10
+
+
+#define GYRO_SPI 1
+#define PIN_GYRO_1_EXTI PC3
+#define PIN_GYRO_2_EXTI PC4
+#define PIN_GYRO_1_CS PA4
+#define PIN_GYRO_2_CS PB2
+
+#define OSD_SPI 2
+#define PIN_OSD_CS PB12
+
+#define FLASH_SPI 3
+#define PIN_FLASH_CS PC13
+
+#define PIN_ADC_VBAT PC1
+#define PIN_ADC_RSSI PC2
+#define PIN_ADC_CURR PC0
+
+#define PIN_IO1 PB0
+
+#define ADC3_DMA_OPT 0
+
+#define ADC_INSTANCE ADC3
+
+#define DEFAULT_CURRENT_METER_SCALE 170
+#define BEEPER_INVERTED
+#define DEFAULT_PID_PROCESS_DENOM 4
+#define PINIO1_BOX 40
+#define PINIO2_BOX 41
+#define GYRO_1_ALIGN CW270_DEG
+#define GYRO_2_ALIGN CW270_DEG
