@@ -1,43 +1,45 @@
 #include <Arduino.h>
 
-class DigitalOutput {
-public:
-    DigitalOutput(int pin, bool defaultState = LOW, bool inverted = false) {
-        this->pin = pin;
-        this->defaultState = defaultState;
-        this->state = defaultState;
-        this->inverted = inverted;
-    }
-
-    void begin() {
-        pinMode(this->pin, OUTPUT);
-        this->set(this->defaultState);
-    }
-
-    void set(bool state) {
-        this->state = state;
-        if (this->inverted) {
-            digitalWrite(this->pin, !state);
-        } else {
-            digitalWrite(this->pin, state);
+namespace bnp {
+    class DigitalOutput {
+    public:
+        DigitalOutput(int pin, bool defaultState = LOW, bool inverted = false) {
+            this->pin = pin;
+            this->defaultState = defaultState;
+            this->state = defaultState;
+            this->inverted = inverted;
         }
-    }
 
-    void on() {
-        this->set(HIGH);
-    }
+        void begin() {
+            pinMode(this->pin, OUTPUT);
+            this->set(this->defaultState);
+        }
 
-    void off() {
-        this->set(LOW);
-    }
+        void set(bool state) {
+            this->state = state;
+            if (this->inverted) {
+                digitalWrite(this->pin, !state);
+            } else {
+                digitalWrite(this->pin, state);
+            }
+        }
 
-    void toggle() {
-        this->set(!this->state);
-    }
+        void on() {
+            this->set(HIGH);
+        }
 
-private:
-    int pin;
-    bool defaultState;
-    bool state;
-    bool inverted;
+        void off() {
+            this->set(LOW);
+        }
+
+        void toggle() {
+            this->set(!this->state);
+        }
+
+    private:
+        int pin;
+        bool defaultState;
+        bool state;
+        bool inverted;
+    };
 };

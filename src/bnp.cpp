@@ -16,7 +16,7 @@ void bnp_init() {
     delay(4000);
     Serial.begin(9600);
     Serial.println("bnp init");
-    bnp_init_spi();
-    bnp_init_i2c();
-    bnp_init_uart();
+    bnp::i2c.init();
+    bnp::spi.init();
+    bnp::uart.init();
 }

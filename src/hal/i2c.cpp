@@ -1,32 +1,35 @@
 #include "i2c.h"
-#include "board.h"
-#include <Wire.h>
+#include "bnp.h"
 
-#if I2C1_ENABLE
-extern TwoWire I2C_1(PIN_I2C1_SDA, PIN_I2C1_SCL);
-#endif
+void bnp::I2CManager::init() {
+    Serial.print("i2c: enabled I2C buses: ");
 
-#if I2C2_ENABLE
-extern TwoWire I2C_2(PIN_I2C2_SDA, PIN_I2C2_SCL);
-#endif
-
-#if I2C3_ENABLE
-extern TwoWire I2C_3(PIN_I2C3_SDA, PIN_I2C3_SCL);
-#endif
-
-void bnp_init_i2c() {
     #if I2C1_ENABLE
-    Serial.println("init I2C1");
-    I2C_1.begin();
+    Serial.print("I2C1 ");
+    this->operator[](1)->begin();
     #endif
     
     #if I2C2_ENABLE
-    Serial.println("init I2C2");
-    I2C_2.begin();
+    Serial.print("I2C2 ");
+    this->operator[](2)->begin();
     #endif
 
     #if I2C3_ENABLE
-    Serial.println("init I2C3");
-    I2C_3.begin();
+    Serial.print("I2C3 ");
+    this->operator[](3)->begin();
     #endif
+    Serial.println("");
+}
+
+TwoWire* bnp::I2CManager::operator[](int index) {
+    if (index < 1 || index > bnp::num_i2c_buses) {
+        bnp::panic(strcat("I2C bus index out of range ", String(index).c_str()));
+        return nullptr;
+    }
+    TwoWire* instance = this->i2c_buses[index-1];
+    if (instance == nullptr) {
+        bnp::panic(strcat("tried to use invalid I2C bus ", String(index).c_str()));
+        return nullptr;
+    }
+    return instance;
 }
