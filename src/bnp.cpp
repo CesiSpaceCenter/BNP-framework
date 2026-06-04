@@ -1,22 +1,39 @@
 #include "bnp.h"
 #include "hal/board.h"
-#include "hal/spi.h"
-#include "hal/i2c.h"
-#include "hal/uart.h"
 #include <Arduino.h>
 
-void bnp_panic(const char* message) {
-    Serial.println("---- PANIC -----");
-    Serial.println(message);
+void bnp::panic(const char* message) {
     digitalWrite(PIN_LED, LOW);
-    while (true);
+    while (true) {
+        Serial.println("---- PANIC ----");
+        Serial.println(message);
+        delay(1000);
+    }
 }
 
-void bnp_init() {
-    delay(4000);
+void bnp::reset() {
+    NVIC_SystemReset();
+}
+
+void bnp::init() {
+    pinMode(PIN_LED, OUTPUT);
+    digitalWrite(PIN_LED, HIGH);
     Serial.begin(9600);
     Serial.println("bnp init");
     bnp::i2c.init();
     bnp::spi.init();
     bnp::uart.init();
+}
+
+void bnp::sleep(long msecs) {
+    if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
+        vTaskDelay((msecs * configTICK_RATE_HZ) / 1000L);
+    } else {
+        delay(msecs);
+    }
+}
+
+void bnp::create_task(TaskFunction_t func, UBaseType_t priority, char* name) {
+    portBASE_TYPE s = xTaskCreate(func, name, configMINIMAL_STACK_SIZE, NULL, priority, NULL);
+    if (s != pdPASS) bnp::panic(strcat("Could not init task ", name));
 }
