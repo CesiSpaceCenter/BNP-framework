@@ -5,6 +5,7 @@
 #include "board.h"
 
 namespace bnp {
+    const int num_spi_buses = 3;
     class SPIManager {
     public:
         void init();

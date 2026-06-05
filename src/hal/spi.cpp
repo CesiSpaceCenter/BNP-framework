@@ -22,9 +22,15 @@ void bnp::SPIManager::init() {
 }
 
 SPIClass* bnp::SPIManager::operator[](int index) {
+    if (index < 1 || index > bnp::num_spi_buses) {
+        String error_msg = "SPI bus index out of range " + String(index);
+        bnp::panic(error_msg.c_str());
+        return nullptr;
+    }
     SPIClass* instance = this->spi_buses[index-1];
     if (instance == nullptr) {
-        bnp::panic(strcat("tried to use invalid SPI bus ", String(index).c_str()));
+        String error_msg = "tried to use invalid SPI bus " + String(index);
+        bnp::panic(error_msg.c_str());
         return nullptr;
     }
     return instance;

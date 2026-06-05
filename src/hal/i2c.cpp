@@ -23,12 +23,14 @@ void bnp::I2CManager::init() {
 
 TwoWire* bnp::I2CManager::operator[](int index) {
     if (index < 1 || index > bnp::num_i2c_buses) {
-        bnp::panic(strcat("I2C bus index out of range ", String(index).c_str()));
+        String error_msg = "I2C bus index out of range " + String(index);
+        bnp::panic(error_msg.c_str());
         return nullptr;
     }
     TwoWire* instance = this->i2c_buses[index-1];
     if (instance == nullptr) {
-        bnp::panic(strcat("tried to use invalid I2C bus ", String(index).c_str()));
+        String error_msg = "tried to use invalid I2C bus " + String(index);
+        bnp::panic(error_msg.c_str());
         return nullptr;
     }
     return instance;
