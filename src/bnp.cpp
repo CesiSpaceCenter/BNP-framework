@@ -5,6 +5,9 @@
 void bnp::panic(const char* message) {
     digitalWrite(PIN_LED, LOW);
     while (true) {
+        if (Serial.available()) {
+            bnp::reset();
+        }
         Serial.println("---- PANIC ----");
         Serial.println(message);
         delay(1000);
